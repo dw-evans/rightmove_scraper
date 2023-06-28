@@ -1,6 +1,8 @@
 # Rightmove API scraper
 # Daniel Evans
 
+# to get this going you need need to create a cloud app here, set up the oauth consent screen and credentials - which ultimately lets you download a credentials.json for the app.
+# https://console.cloud.google.com/getting-started?authuser=1
 
 # Requires a credentials.json for the gmail api. Should be able to look it up but feel free to ask me
 
