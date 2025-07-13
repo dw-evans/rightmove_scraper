@@ -1,155 +1,166 @@
-// this is an example file to feed into chatgpt to get it to build dataclasses
 {
-    "id": 135092456,
+    "id": 162800087,
     "bedrooms": 1,
     "bathrooms": 1,
-    "numberOfImages": 11,
-    "numberOfFloorplans": 1,
-    "numberOfVirtualTours": 1,
-    "summary": "Ocean are proud to welcome you to The Old Fire Station. An apartment nestled in the heart of Southville on Raleigh Road, this top-floor, one bedroom apartment offers a delightful combination of convenience, style, and breath-taking views.",
-    "displayAddress": "Old Fire Station - Southville",
+    "numberOfImages": 13,
+    "numberOfFloorplans": 0,
+    "numberOfVirtualTours": 0,
+    "summary": "A fabulous first floor apartment in a quiet location, Close to the picturesque River Avon, cycle routes in to the Bristol City Centre. Offered on a unfurnished basis and available for July.",
+    "displayAddress": "Langton Way, Bristol, BS4",
     "countryCode": "GB",
     "location": {
-        "latitude": 51.44269,
-        "longitude": -2.61231
+        "latitude": 51.45375,
+        "longitude": -2.54021
     },
     "propertyImages": {
         "images": [
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_00_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_00_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_11_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_11_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_01_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_01_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_06_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_06_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_02_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_02_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_03_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_03_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_03_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_03_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_09_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_09_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_04_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_04_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_12_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_12_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_05_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_05_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_08_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_08_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_06_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_06_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_05_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_05_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_07_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_07_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_07_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_07_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_08_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_08_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_04_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_04_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_09_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_09_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_00_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_00_0000_max_476x317.jpeg"
             },
             {
-                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_10_0000_max_476x317.jpeg",
-                "url": "66k/65861/135092456/65861_2663034_IMG_10_0000.jpeg",
-                "caption": None
+                "url": "279k/278138/162800087/278138_2529_IMG_01_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_01_0000_max_476x317.jpeg"
+            },
+            {
+                "url": "279k/278138/162800087/278138_2529_IMG_02_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_02_0000_max_476x317.jpeg"
+            },
+            {
+                "url": "279k/278138/162800087/278138_2529_IMG_10_0000.jpeg",
+                "caption": null,
+                "srcUrl": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_10_0000_max_476x317.jpeg"
             }
         ],
-        "mainImageSrc": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_00_0000_max_476x317.jpeg",
-        "mainMapImageSrc": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/66k/65861/135092456/65861_2663034_IMG_00_0000_max_296x197.jpeg"
+        "mainImageSrc": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_11_0000_max_476x317.jpeg",
+        "mainMapImageSrc": "https://media.rightmove.co.uk:443/dir/crop/10:9-16:9/279k/278138/162800087/278138_2529_IMG_11_0000_max_296x197.jpeg"
     },
     "propertySubType": "Flat",
     "listingUpdate": {
         "listingUpdateReason": "new",
-        "listingUpdateDate": "2023-05-22T11:46:05Z"
+        "listingUpdateDate": "2025-06-16T19:20:04Z"
     },
-    "premiumListing": True,
-    "featuredProperty": True,
     "price": {
-        "amount": 1200,
+        "amount": 1050,
         "frequency": "monthly",
         "currencyCode": "GBP",
         "displayPrices": [
             {
-                "displayPrice": "£1,200 pcm",
+                "displayPrice": "\u00a31,050 pcm",
                 "displayPriceQualifier": ""
             },
             {
-                "displayPrice": "£277 pw",
+                "displayPrice": "\u00a3242 pw",
                 "displayPriceQualifier": ""
             }
         ]
     },
+    "premiumListing": false,
+    "featuredProperty": true,
     "customer": {
-        "branchId": 65861,
-        "brandPlusLogoURI": "/company/clogo_rmchoice_3908_0004.jpeg",
-        "contactTelephone": "0117 463 0103",
-        "branchDisplayName": "Ocean, Southville",
-        "branchName": "Southville",
-        "brandTradingName": "Ocean",
-        "branchLandingPageUrl": "/estate-agents/agent/Ocean/Southville-65861.html",
-        "development": False,
-        "showReducedProperties": True,
-        "commercial": False,
-        "showOnMap": True,
-        "enhancedListing": False,
-        "developmentContent": None,
-        "buildToRent": False,
+        "branchId": 278138,
+        "brandPlusLogoURI": "/279k/278138/branch_rmchoice_logo_278138_0001.png",
+        "contactTelephone": "0117 463 4665",
+        "branchDisplayName": "Sheedy & Co, Covering Bristol",
+        "branchName": "Covering Bristol",
+        "brandTradingName": "Sheedy & Co",
+        "branchLandingPageUrl": "/estate-agents/agent/Sheedy-and-Co/Covering-Bristol-278138.html",
+        "development": false,
+        "showReducedProperties": true,
+        "commercial": false,
+        "showOnMap": true,
+        "enhancedListing": false,
+        "developmentContent": null,
+        "buildToRent": false,
         "buildToRentBenefits": [],
-        "brandPlusLogoUrl": "https://media.rightmove.co.uk:443/dir/company/clogo_rmchoice_3908_0004_max_100x50.jpeg"
+        "brandPlusLogoUrl": "https://media.rightmove.co.uk:443/279k/278138/branch_rmchoice_logo_278138_0001.png"
     },
-    "distance": None,
+    "distance": null,
     "transactionType": "rent",
     "productLabel": {
-        "productLabelText": "Premium Listing",
-        "spotlightLabel": False
+        "productLabelText": null,
+        "spotlightLabel": false
     },
-    "commercial": False,
-    "development": False,
-    "residential": True,
-    "students": False,
-    "auction": False,
-    "feesApply": True,
-    "feesApplyText": "Relevant letting fees and tenant protection information\t\n\nBefore the tenancy starts (payable to Ocean Letting & Management Ltd  the Agent ) \nHolding Deposit: 1 week s rent\nDeposit: 5 weeks  rent. This is worked out by multiplying the rent by 12, dividing that figure by 52 and then multiplying that figure by 5.\nSo for example if the rent was £1,000pcm\n£1,000 multiply by 12 = £12,000\n£12,000 divide by 52 = £230.77\n£230.77 multiply by 5 = £1,153.85\nSo the deposit will be £1,153.85\n\nDuring the tenancy (payable to the Agent) \nAs well as paying the rent, you may also be required to make the following permitted payments.\n\nPermitted payments\nPayment of [up to £300 + VAT] if you want to change the tenancy agreement.\nPayment of interest for the late payment of rent at a rate of 3% above the Bank of England s base rate.\nPayment of the invoice cost for the reasonably incurred costs for the loss of keys/security devices\nPayment of any unpaid rent and other reasonable costs associated with your early termination of the tenancy that the landlord would incur for remarketing\n\nTenant protection\nOcean Letting & Management Ltd is a member of ARLA, which is our Governing body and a client money protection scheme, and also a member of The Property Ombudsman, which is a redress scheme. You can find out more details on the agent s website or by contacting the agent directly\n\nFull details of our landlord fees can be found at  \n",
-    "displaySize": "",
-    "showOnMap": True,
-    "propertyUrl": "/properties/135092456#/?channel=RES_LET",
-    "contactUrl": "/property-to-rent/contactBranch.html?propertyId=135092456",
-    "staticMapUrl": None,
+    "commercial": false,
+    "development": false,
+    "residential": true,
+    "students": false,
+    "auction": false,
+    "feesApply": true,
+    "feesApplyText": "UKala Membership, UKala CMP, Ukala PRS, ICO ",
+    "displaySize": "452 sq. ft.",
+    "showOnMap": true,
+    "propertyUrl": "/properties/162800087#/?channel=RES_LET",
+    "contactUrl": "/property-to-rent/contactBranch.html?propertyId=162800087",
+    "staticMapUrl": null,
     "channel": "RENT",
-    "firstVisibleDate": "2023-05-22T11:40:17Z",
+    "firstVisibleDate": "2025-06-16T19:14:35Z",
     "keywords": [],
     "keywordMatchType": "no_keyword",
-    "saved": False,
-    "hidden": False,
-    "onlineViewingsAvailable": False,
+    "saved": false,
+    "hidden": false,
+    "onlineViewingsAvailable": false,
     "lozengeModel": {
         "matchingLozenges": []
     },
-    "hasBrandPlus": True,
+    "hasBrandPlus": true,
     "displayStatus": "",
-    "enquiredTimestamp": None,
+    "enquiredTimestamp": null,
+    "enquiryAddedTimestamp": null,
+    "enquiryCalledTimestamp": null,
     "heading": "Featured Property",
-    "propertyTypeFullDescription": "1 bedroom flat",
-    "addedOrReduced": "Added yesterday",
-    "formattedBranchName": " by Ocean, Southville",
-    "isRecent": True,
+    "isRecent": false,
+    "enhancedListing": false,
+    "addedOrReduced": "Added on 16/06/2025",
+    "formattedBranchName": " by Sheedy & Co, Covering Bristol",
     "formattedDistance": "",
-    "enhancedListing": False
+    "propertyTypeFullDescription": "1 bedroom flat"
 }

@@ -8,14 +8,16 @@ from email.mime.multipart import MIMEMultipart
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from requests import HTTPError
+from pathlib import Path
+def initialize(credentials_fp:Path):
+    global SCOPES, SERVICE
 
+    SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
-SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
+    flow = InstalledAppFlow.from_client_secrets_file(credentials_fp, SCOPES)
+    creds = flow.run_local_server(port=0)
 
-flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
-creds = flow.run_local_server(port=0)
-
-service = build("gmail", "v1", credentials=creds)
+    SERVICE = build("gmail", "v1", credentials=creds)
 
 
 def send_html_email(recipient, subject, html_content):
@@ -34,7 +36,7 @@ def send_html_email(recipient, subject, html_content):
 
     try:
         message = (
-            service.users()
+            SERVICE.users()
             .messages()
             .send(userId=user_id, body=create_message)
             .execute()

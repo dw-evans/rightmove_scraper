@@ -1,7 +1,5 @@
-# generated thanks to chatgpt - ask it to create dataclasses for property.json
-
 from dataclasses import dataclass
-from typing import List, Dict, Optional
+from typing import List, Optional
 
 
 @dataclass
@@ -11,15 +9,15 @@ class Location:
 
 
 @dataclass
-class PropertyImage:
-    srcUrl: str
+class Image:
     url: str
     caption: Optional[str]
+    srcUrl: str
 
 
 @dataclass
 class PropertyImages:
-    images: List[PropertyImage]
+    images: List[Image]
     mainImageSrc: str
     mainMapImageSrc: str
 
@@ -66,8 +64,13 @@ class Customer:
 
 @dataclass
 class ProductLabel:
-    productLabelText: str
+    productLabelText: Optional[str]
     spotlightLabel: bool
+
+
+@dataclass
+class LozengeModel:
+    matchingLozenges: List[str]
 
 
 @dataclass
@@ -85,9 +88,9 @@ class Property:
     propertyImages: PropertyImages
     propertySubType: str
     listingUpdate: ListingUpdate
+    price: Price
     premiumListing: bool
     featuredProperty: bool
-    price: Price
     customer: Customer
     distance: Optional[float]
     transactionType: str
@@ -111,14 +114,16 @@ class Property:
     saved: bool
     hidden: bool
     onlineViewingsAvailable: bool
-    lozengeModel: Dict[str, List[str]]
+    lozengeModel: LozengeModel
     hasBrandPlus: bool
     displayStatus: str
     enquiredTimestamp: Optional[str]
+    enquiryAddedTimestamp: Optional[str]
+    enquiryCalledTimestamp: Optional[str]
     heading: str
-    propertyTypeFullDescription: str
+    isRecent: bool
+    enhancedListing: bool
     addedOrReduced: str
     formattedBranchName: str
-    isRecent: bool
     formattedDistance: str
-    enhancedListing: bool
+    propertyTypeFullDescription: str

@@ -1,0 +1,9 @@
+recipients = "dw.evans1998@gmail.com" # separate multiple recipients using commas
+subject = "New Properties on Rightmove!"
+
+locationIdentifier = "REGION^219" # REGION^129 is bristol, I'd have to manually find more specific ones.
+maxBedrooms = 2
+minBedrooms = 1
+maxPrice = 1400 # GBP pcm
+radius = 0.0 # radius zero seems to work for all of Bristol?
+timeBetweenRequests = 60 # minimum of 60 sec enforced in the code (so noone gets blacklisted...)

@@ -14,50 +14,121 @@
 
 from __future__ import annotations
 
-import requests
+__pkgname__ = "rm-scraper"
+__version__ = "0.0.1"
+__author__ = "D Evans"
+__built_for__ = "BUILT_FOR_NAME_PENDING"
 
+
+def disable_quickedit():
+    '''
+    Disable quickedit mode on Windows terminal. quickedit prevents script to
+    run without user pressing keys..'''
+    import os
+    if not os.name == 'posix':
+        try:
+            import msvcrt
+            import ctypes
+            kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
+            device = r'\\.\CONIN$'
+            with open(device, 'r') as con:
+                hCon = msvcrt.get_osfhandle(con.fileno())
+                kernel32.SetConsoleMode(hCon, 0x0080)
+        except Exception as e:
+            print('Cannot disable QuickEdit mode! ' + str(e))
+            print('.. As a consequence the script might be automatically\
+            paused on Windows terminal')
+
+    pass
+
+disable_quickedit()
+
+import requests
 import time
 from datetime import datetime
-
+import tomllib
+from dataclasses import dataclass, field
+import sys
+import traceback
 from property import Property
+import send_email
+from pathlib import Path
 
-from send_email import send_html_email
+MIN_TIME_BETWEEN_REQUESTS = 60
 
-url = "https://www.rightmove.co.uk/api/_search"
+if getattr(sys, "frozen", False):
+    BASE_PATH = Path(sys._MEIPASS)
+    WD = Path(sys.executable).parent
+else:
+    BASE_PATH = Path(__file__).parent
+    WD = Path(__file__).parent
+
+CREDENTIALS_FP = BASE_PATH / "credentials.json"
+CONFIG_FP = WD / "config.toml"
+MAIN_LOG_FP = WD / "main.log"
+
+
+@dataclass
+class Config:
+    recipients: str
+    subject: str
+
+    locationIdentifier: str
+    maxBedrooms: int
+    minBedrooms: int
+    maxPrice: int
+    radius: float
+    numberOfPropertiesPerPage: int = field(default=500)
+    sortType: int = field(default=6)
+    index: int = field(default=24)
+    includeLetAgreed: str = field(default="false")
+    viewType: str = field(default="LIST")
+    channel: str = field(default="RENT")
+    areaSizeUnit: str = field(default="sqft")
+    currencyCode: str = field(default="GBP")
+    isFetching: str = field(default="false")
+
+    timeBetweenRequests: int = field(default=60)
+
+    @staticmethod
+    def load():
+        try:
+            with open(CONFIG_FP, "rb") as f:
+                data = tomllib.load(f)
+            return Config(**data)
+        except FileNotFoundError as e:
+            print(f"File not found at {CONFIG_FP}")
+            raise
+
+    @property
+    def paramsdict(self):
+        d = {
+            "locationIdentifier": self.locationIdentifier,
+            "maxBedrooms": self.maxBedrooms,
+            "minBedrooms": self.minBedrooms,
+            "maxPrice": self.maxPrice,
+            "radius": self.radius,
+            "numberOfPropertiesPerPage": self.numberOfPropertiesPerPage,
+            "sortType": self.sortType,
+            "index": self.index,
+            "includeLetAgreed": self.includeLetAgreed,
+            "viewType": self.viewType,
+            "channel": self.channel,
+            "areaSizeUnit": self.areaSizeUnit,
+            "currencyCode": self.currencyCode,
+            "isFetching": self.isFetching,
+        }
+        return d
+
+
+CFG = Config.load()
+PARAMS = CFG.paramsdict
+
+URL = "https://www.rightmove.co.uk/api/_search"
 
 # most of the headers aren't needed
-headers = {
+HEADERS = {
     "Accept": "application/json, text/plain, */*",
-    # 'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8',
-    # 'Connection': 'keep-alive',
-    # 'Cookie': 'permuserid=2305231MSYX8HQ0AJCOW1HC39PQEDJOP; rmsessionid=1e20ab00-0309-40a3-8990-633b4444eeea; beta_optin=N:85:-1; RM_Register=C; TS019c0ed0=012f990cd36bb9684f9b9ff544d982bbe272668dbb85a9e9e31e42de9d346c796e20a9695a33e024446e196246f64395cacb5769ba; TS01826437=012f990cd36bb9684f9b9ff544d982bbe272668dbb85a9e9e31e42de9d346c796e20a9695a33e024446e196246f64395cacb5769ba; TPCmaxPrice=1400; TS01aff9d4=012f990cd34dbc4f309a7541c24046fef1c0102d69f48def0403cc2e1a5b01eefb53833a431da12bb8da523a3fd5aa1d0acbda8bb9; _gaRM1_ga=GA1.1.1996025758.1684826662; _gaRM=GA1.3.1996025758.1684826662; _gaRM_gid=GA1.3.148442785.1684826662; _dc_gtm_UA-3350334-63=1; TS01a07bd2=012f990cd36bb9684f9b9ff544d982bbe272668dbb85a9e9e31e42de9d346c796e20a9695a33e024446e196246f64395cacb5769ba; OptanonConsent=isIABGlobal=false&datestamp=Tue+May+23+2023+08%3A24%3A50+GMT%2B0100+(British+Summer+Time)&version=5.11.0&landingPath=https%3A%2F%2Fwww.rightmove.co.uk%2Fproperty-to-rent%2Ffind.html%3FsearchType%3DRENT%26locationIdentifier%3DREGION%255E219%26insId%3D1%26radius%3D0.0%26minPrice%3D%26maxPrice%3D1400%26minBedrooms%3D1%26maxBedrooms%3D2%26displayPropertyType%3D%26maxDaysSinceAdded%3D%26sortByPriceDescending%3D%26_includeLetAgreed%3Don%26primaryDisplayPropertyType%3D%26secondaryDisplayPropertyType%3D%26oldDisplayPropertyType%3D%26oldPrimaryDisplayPropertyType%3D%26letType%3D%26letFurnishType%3D%26houseFlatShare%3D&groups=1%3A1%2C3%3A0%2C4%3A0; _gaRM1_ga_G0CW62CSDJ=GS1.1.1684826662.1.1.1684826695.0.0.0',
-    # 'Referer': 'https://www.rightmove.co.uk/property-to-rent/find.html?locationIdentifier=REGION%5E219&maxBedrooms=2&minBedrooms=1&maxPrice=1400&index=24&propertyTypes=&includeLetAgreed=false&mustHave=&dontShow=&furnishTypes=&keywords=',
-    # 'Sec-Fetch-Dest': 'empty',
-    # 'Sec-Fetch-Mode': 'cors',
-    # 'Sec-Fetch-Site': 'same-origin',
-    # 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36',
-    # 'sec-ch-ua': '"Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
-    # 'sec-ch-ua-mobile': '?0',
-    # 'sec-ch-ua-platform': '"Windows"'
-}
-
-# this is a search across Bristol for 1-2 beds under £1400 pcm
-params = {
-    "locationIdentifier": "REGION^219",
-    "maxBedrooms": 2,
-    "minBedrooms": 1,
-    "maxPrice": 1400,
-    # this is capped at 500 - I never ran into more than around 160 so never needed send multiple requests or anything
-    "numberOfPropertiesPerPage": 500,
-    "radius": 0.0,
-    "sortType": 6,
-    "index": 24,
-    "includeLetAgreed": "false",
-    "viewType": "LIST",
-    "channel": "RENT",
-    "areaSizeUnit": "sqft",
-    "currencyCode": "GBP",
-    "isFetching": "false",
 }
 
 
@@ -77,24 +148,23 @@ def property_summary(prop: Property) -> str:
     return s
 
 
-def create_message(properties: list[properties]) -> str:
+def create_message(properties: list[Property]) -> str:
     # creates html for a list of properties
     string = ""
 
     for p in properties:
         string = string + property_summary(p)
     pass
-
     return string
 
 
 def main(history_ids: set[str]) -> tuple[list[Property], list[Property]]:
     properties = []
 
-    response = requests.get(url, headers=headers, params=params)
+    response = requests.get(URL, headers=HEADERS, params=PARAMS)
     data = response.json()
 
-    print(len(data["properties"]))
+    # print(len(data["properties"]))
 
     for kwargs in data["properties"]:
         properties.append(Property(**kwargs))
@@ -110,7 +180,7 @@ def main(history_ids: set[str]) -> tuple[list[Property], list[Property]]:
         )
     )
 
-    print(f"{len(new_properties)} new properties {datetime.now()}")
+    # print(f"{len(new_properties)} new properties {datetime.now()}")
 
     return (
         properties,
@@ -125,15 +195,36 @@ history_ids = set()
 
 res = ""
 
+msg = f"""
+                                                    
+     ___  _____  ___  ___  ___  ___  ___  ___  ___  ___ 
+    |  _||     ||___||_ -||  _||  _|| .'|| . || -_||  _|
+    |_|  |_|_|_|     |___||___||_|  |__,||  _||___||_|  
+                                         |_|            
+    
+    {__pkgname__} v{__version__}
+    Copyright 2025 (c) D.Evans 
 
+    Use is exclusively reserved for {__built_for__}.
+
+    Enjoy :)
+
+"""
 if __name__ == "__main__":
+    send_email.initialize(CREDENTIALS_FP)
+
+    print(msg)
+
     try:
+        print("Will send emails to the following:")
+        print(f"{CFG.recipients}")
+
         while True:
             properties, new_properties = main(history_ids)
             time_at_response = datetime.now()
 
-            with open("main.log", "a") as f:
-                print(f"{len(new_properties)} found... sending email")
+            with open(MAIN_LOG_FP, "a") as f:
+                print(f"{len(new_properties)} found at {datetime.now()}...")
                 f.write(
                     f"LOG {time_at_response}:{len(new_properties)} found, {[p.id for p in new_properties]}\n"
                 )
@@ -143,22 +234,36 @@ if __name__ == "__main__":
             if new_properties:
                 html_content = create_message(new_properties)
                 html_content = html_content + f"<p>{time_at_response}</p>"
+                print(f"Sending email...")
                 if not_first:
-                    send_html_email(
-                        subject="New Properties On Rightmove!",
-                        recipient="   ENTER RECIPIENTS HERE SEPARATED BY COMMAS   ",
+                    send_email.send_html_email(
+                        subject=CFG.subject,
+                        recipient=CFG.recipients,
                         html_content=html_content,
                     )
-                    print(f"email sent!")
+                    print(f"Email sent")
                     print("")
+            else:
+                print("No new properties found.")
+                print("")
+
             not_first = True
+            time.sleep(max(MIN_TIME_BETWEEN_REQUESTS, CFG.timeBetweenRequests))
 
-            time.sleep(1 * 60)
-
-    except KeyboardInterrupt:
-        quit()
-    except Exception:
-        quit()
-
-
-print("Done")
+    except KeyboardInterrupt as e:
+        print(f"Keyboard Interrupt {e}")
+        input("Press Enter to Exit...")
+        print("Exiting...")
+        sys.exit(0)
+    except Exception as e:
+        print("")
+        print(f"Exception occurred: {e}")
+        _, _, tb = sys.exc_info()
+        trace = traceback.format_exc()
+        print("")
+        print("Traceback:")
+        print(trace)
+        print("")
+        input("Press Enter to Exit...")
+        print("Exiting...")
+        sys.exit(0)

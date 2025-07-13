@@ -233,3 +233,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+!main.spec
